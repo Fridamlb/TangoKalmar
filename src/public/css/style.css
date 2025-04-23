@@ -1,0 +1,119 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+header {
+  background: linear-gradient(135deg, #952525, #1a1a1a);
+  padding: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+header nav ul li a:hover {
+  background: rgba(123, 113, 113, 0.1);
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Aktiv länk-effekt */
+header nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #ff7e5f;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+header nav ul li a:hover::after {
+  width: 70%;
+}
+
+/* Logo eller rubrik i header (lägga till senare) */
+/* .header-logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: #fff;
+  margin-right: auto;
+} */
+
+/* Huvudinnehåll */
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
+footer {
+  background: linear-gradient(135deg, #952525, #1a1a1a);
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  header nav ul li {
+    width: 100%;
+    text-align: center;
+  }
+  
+  header nav ul li a {
+    display: block;
+  }
+}
