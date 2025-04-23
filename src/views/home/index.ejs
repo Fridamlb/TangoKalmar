@@ -3,9 +3,23 @@
 <head>
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/login.js"></script>
 </head>
 <body>
   <%- include('../partials/header') %>
+
+  <div id="admin-login">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Användarnamn">
+    <input type="password" id="password" placeholder="Lösenord">
+    <button id="login-btn">Logga in</button>
+  </div>
+
+  <div id="course-form" style="display: none;">
+    <!-- Här kommer kursformuläret synas efter inlogg -->
+    <h2>Lägg till kurs</h2>
+    <!-- Form-fält kan du bygga efter behov -->
+  </div>
 
   <main>
     <h1>Välkommen till TangoKalmar</h1>
