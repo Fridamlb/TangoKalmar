@@ -7,7 +7,18 @@
 <body>
   <%- include('../partials/header') %>
 
-  <!-- Inloggning - syns alltid först -->
+  <!-- Kursformulär - dolt initialt -->
+  <div id="course-form" style="display: none;">
+    <%- include('../partials/course-form') %>
+  </div>
+
+  <!--sektion för att visa kurser -->
+  <section id="courses-section">
+    <h2>Tango Kurser</h2>
+    <div id="public-course-list" class="courses-container">
+    </div>
+  </section>
+
   <div id="admin-login" style="display: block;">
     <h2>Admin Login</h2>
     <input type="text" id="username" placeholder="Användarnamn" required>
@@ -16,19 +27,6 @@
   </div>
 
   <button id="logout-btn">Logga ut</button>
-
-  <!-- Kursformulär - dolt initialt -->
-  <div id="course-form" style="display: none;">
-    <%- include('../partials/course-form') %>
-  </div>
-
-  <!-- Lägg till denna sektion för att visa kurser -->
-  <section id="courses-section">
-    <h2>Tango Kurser</h2>
-    <div id="public-course-list" class="courses-container">
-      <!-- Kurserna kommer att renderas här dynamiskt -->
-    </div>
-  </section>
 
   <%- include('../partials/footer') %>
   
