@@ -2,9 +2,10 @@ import Course from '../models/course.js'
 
 // GET /courses
 /**
+ * Retrieves all active courses from the database and sends them as a JSON response.
  *
- * @param req
- * @param res
+ * @param {import('express').Response} req - The HTTP request object.
+ * @param {import('express').Response} res - The HTTP response object.
  */
 export async function getCourses (req, res) {
   try {
@@ -20,9 +21,11 @@ export async function getCourses (req, res) {
 }
 // POST /courses
 /**
+ * Deletes a course by its ID and sends a confirmation message or an error response.
  *
- * @param req
- * @param res
+ * @param {import('express').Request} req - The HTTP request object.
+ * @param {import('express').Response} res - The HTTP response object.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
 export async function createCourse (req, res) {
   try {
@@ -36,9 +39,11 @@ export async function createCourse (req, res) {
 
 // PUT /courses/:id
 /**
+ * Updates a course by its ID and sends the updated course or an error response.
  *
- * @param req
- * @param res
+ * @param {import('express').Request} req - The HTTP request object.
+ * @param {import('express').Response} res - The HTTP response object.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
 export async function updateCourse (req, res) {
   try {
@@ -58,9 +63,11 @@ export async function updateCourse (req, res) {
 
 // DELETE /courses/:id
 /**
+ * Deletes a course by its ID and sends a confirmation message or an error response.
  *
- * @param req
- * @param res
+ * @param {import('express').Request} req - The HTTP request object.
+ * @param {import('express').Response} res - The HTTP response object.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
 export async function deleteCourse (req, res) {
   try {

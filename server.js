@@ -36,6 +36,13 @@ app.use('/', router)
 app.use('/courses', courseRoutes)
 
 // JWT-inloggning
+/**
+ * Generates a JSON Web Token (JWT) for a user.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {boolean} isAdmin - Whether the user is an admin.
+ * @returns {string} The generated JWT.
+ */
 const generateToken = (userId, isAdmin) => {
   return jwt.sign(
     { id: userId, isAdmin },

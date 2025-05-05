@@ -98,11 +98,11 @@ header {
   width: 100%;
 }
 
-/* Admin Login - diskret men tillgänglig */
+/* Admin Login */
 #admin-login {
   background-color: #f9f7f4;
   padding: 1.5rem;
-  max-width: 400px;
+  max-width: 200px;
   margin: 2rem auto;
   border: 1px solid #ddd;
   border-radius: 6px;

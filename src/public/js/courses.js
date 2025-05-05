@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize the UI
   /**
-   *
+   * Initializes the application by setting up event listeners, updating the UI, and fetching courses.
    */
   function init () {
     setupEventListeners()
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set up all event listeners
   /**
-   *
+   * Sets up all event listeners for the application.
    */
   function setupEventListeners () {
     // Toggle course form visibility
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Update admin UI based on login status
   /**
-   *
+   * Updates the admin UI based on the user's login status.
    */
   function updateAdminUI () {
     const isAdmin = localStorage.getItem('isAdmin') === 'true'
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fetch courses from server
   /**
-   *
+   * Fetches the list of courses from the server and updates the UI.
    */
   async function fetchCourses () {
     try {
@@ -99,8 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render both admin and public course lists
   /**
+   * Renders both the admin and public course lists using the provided courses.
    *
-   * @param coursesToRender
+   * @param {string} coursesToRender - The list of courses to render in the UI.
    */
   function renderCourseLists (coursesToRender = courses) {
     renderAdminCourseList(coursesToRender)
@@ -109,8 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render admin course list
   /**
+   * Renders the admin course list in the table format.
    *
-   * @param coursesToRender
+   * @param {string} coursesToRender - The list of courses to render in the admin UI.
    */
   function renderAdminCourseList (coursesToRender) {
     if (!elements.coursesList) return
@@ -147,8 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render public course list
   /**
+   * Renders the public course list in a card format.
    *
-   * @param coursesToRender
+   * @param {string} coursesToRender - The list of courses to render in the public UI.
    */
   function renderPublicCourseList (coursesToRender) {
     if (!elements.publicCourseList) return
@@ -160,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
           return `
           <div class="course-card">
             <h3>${course.title}</h3>
-            <p>Antal lektioner: ${course.weeks}</p>
-            <p>Längd per lektion: ${course.lessonLength} minuter</p>
-            <p>Lärare: ${course.teacher}</p>
-            <p>Pris: ${course.price} kr</p>
+            <p><strong>Antal lektioner:</strong> ${course.weeks}</p>
+            <p><strong>Längd per lektion:</strong> ${course.lessonLength} minuter</p>
+            <p><strong>Lärare:</strong> ${course.teacher}</p>
+            <p><strong>Pris:</strong> ${course.price} kr</p>
             <p><strong>Kursinnehåll:</strong><br>${course.description || 'Ingen beskrivning tillgänglig'}</p>
           </div>
         `
@@ -172,8 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle form submission
   /**
+   * Handles the submission of the course form, either creating or updating a course.
    *
-   * @param e
+   * @param  {string} e - The event object from the form submission.
    */
   async function handleFormSubmit (e) {
     e.preventDefault()
@@ -231,8 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Edit course
   /**
+   * Deletes a course by its ID.
    *
-   * @param courseId
+   * @param {string} courseId - The ID of the course to delete.
    */
   function editCourse (courseId) {
     const course = courses.find(c => c._id === courseId)
@@ -256,8 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Delete course
   /**
+   * Deletes a course by its ID.
    *
-   * @param courseId
+   * @param {string} courseId - The ID of the course to delete.
    */
   async function deleteCourse (courseId) {
     try {
@@ -286,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Reset form to initial state
   /**
-   *
+   * Resets the course form to its initial state, clearing all input fields and resetting the save button text.
    */
   function resetForm () {
     elements.courseForm.reset()
@@ -294,20 +300,12 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.formFields.saveBtn.textContent = 'Spara kurs'
   }
 
-  // Format date for input field
-  /**
-   *
-   * @param dateString
-   */
-  function formatDateForInput (dateString) {
-    return new Date(dateString).toISOString().split('T')[0]
-  }
-
   // Show notification
   /**
+   * Displays a notification message on the screen with a specified type.
    *
-   * @param message
-   * @param type
+   * @param {string} message - The message to display in the notification.
+   * @param {string} [type='info'] - The type of notification (e.g., 'info', 'success', 'error').
    */
   function showNotification (message, type = 'info') {
     const notification = document.createElement('div')
