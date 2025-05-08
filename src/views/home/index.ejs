@@ -6,7 +6,6 @@
 </head>
 <body>
   <%- include('../partials/header') %>
-
   <!-- Kursformulär - dolt initialt -->
   <div id="course-form" style="display: none;">
     <%- include('../partials/course-form') %>
@@ -18,15 +17,6 @@
     <div id="public-course-list" class="courses-container">
     </div>
   </section>
-
-  <div id="admin-login" style="display: block;">
-    <h2>Admin Login</h2>
-    <input type="text" id="username" placeholder="Användarnamn" required>
-    <input type="password" id="password" placeholder="Lösenord" required>
-    <button id="login-btn">Logga in</button>
-  </div>
-
-  <button id="logout-btn">Logga ut</button>
 
   <%- include('../partials/footer') %>
   
