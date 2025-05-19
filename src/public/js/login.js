@@ -1,17 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Script laddat') // Felsökningsmeddelande 1
+  console.log('Script loaded') // Debug message 1
 
-  const loginBtn = document.getElementById('login-btn')
+  const loginPopupBtn = document.querySelector('.btnLogin-popup')
+  const wrapper = document.querySelector('.wrapper')
+  const iconClose = document.querySelector('.icon-close')
+  const loginForm = document.querySelector('.form-box.login form')
   const adminLogin = document.getElementById('admin-login')
   const courseForm = document.getElementById('course-form')
+  const btnPopup = document.querySelector('.btnLogin-popup')
 
-  console.log('Element:', { loginBtn, adminLogin, courseForm }) // Felsökningsmeddelande 2
+  btnPopup.addEventListener('click', () => {
+    wrapper.classList.add('active-popup')
+  })
 
-  // Kontrollera localStorage
+  console.log('Elements:', { loginPopupBtn, wrapper, loginForm, adminLogin, courseForm }) // Debug message 2
+
+  // Check localStorage
   const isAdmin = localStorage.getItem('isAdmin') === 'true'
-  console.log('Är admin:', isAdmin) // Felsökningsmeddelande 3
+  console.log('Is admin:', isAdmin) // Debug message 3
 
-  // Visa/dölj element baserat på inloggning
+  // Show/hide elements based on login status
   if (adminLogin) adminLogin.style.display = isAdmin ? 'none' : 'block'
   if (courseForm) courseForm.style.display = isAdmin ? 'block' : 'none'
 
@@ -19,21 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
       localStorage.removeItem('isAdmin')
-      location.reload() // Ladda om sidan
+      localStorage.removeItem('token')
+      location.reload() // Reload the page
     })
   }
 
-  // Hantera inloggning
-  if (loginBtn) {
-    loginBtn.addEventListener('click', async (e) => {
-      e.preventDefault()
-      console.log('Login-klickad') // Felsökningsmeddelande 4
+  // Handle popup login form
+  if (loginPopupBtn) {
+    loginPopupBtn.addEventListener('click', () => {
+      wrapper.classList.add('active-popup')
+    })
+  }
 
-      const username = document.getElementById('username').value
-      const password = document.getElementById('password').value
+  if (iconClose) {
+    iconClose.addEventListener('click', () => {
+      wrapper.classList.remove('active-popup')
+    })
+  }
+
+  // Handle login form submission
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      console.log('Login form submitted') // Debug message 4
+
+      const username = loginForm.querySelector('input[type="Username"]').value
+      const password = loginForm.querySelector('input[type="password"]').value
 
       try {
-        console.log('Försöker logga in...') // Felsökningsmeddelande 5
+        console.log('Attempting login...') // Debug message 5
         const response = await fetch('/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -41,20 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
         const result = await response.json()
-        console.log('Login-svar:', result) // Felsökningsmeddelande 6
+        console.log('Login response:', result) // Debug message 6
 
         if (result.success && result.token) {
           localStorage.setItem('isAdmin', 'true')
           localStorage.setItem('token', result.token)
           if (adminLogin) adminLogin.style.display = 'none'
           if (courseForm) courseForm.style.display = 'block'
-          console.log('Inloggning lyckades') // Felsökningsmeddelande 7
+          wrapper.classList.remove('active-popup')
+          console.log('Login successful') // Debug message 7
+          location.reload() // Reload to update the UI
         } else {
-          alert(result.message || 'Inloggning misslyckades')
+          alert(result.message || 'Login failed')
         }
       } catch (error) {
-        console.error('Login error:', error) // Felsökningsmeddelande 8
-        alert('Ett fel uppstod vid inloggning')
+        console.error('Login error:', error) // Debug message 8
+        alert('An error occurred during login')
       }
     })
   }
