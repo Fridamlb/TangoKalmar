@@ -161,14 +161,24 @@ document.addEventListener('DOMContentLoaded', () => {
       : coursesToRender
         .map(course => {
           return `
-          <div class="course-card">
-            <h3>${course.title}</h3>
-            <p><strong>Antal lektioner:</strong> ${course.weeks}</p>
-            <p><strong>Längd per lektion:</strong> ${course.lessonLength} minuter</p>
-            <p><strong>Lärare:</strong> ${course.teacher}</p>
-            <p><strong>Pris:</strong> ${course.price} kr</p>
-            <p><strong>Kursinnehåll:</strong><br>${course.description || 'Ingen beskrivning tillgänglig'}</p>
+        <div class="course-card">
+          <h3>${course.title}</h3>
+          <p><strong>Antal lektioner:</strong> ${course.weeks}</p>
+          <p><strong>Längd per lektion:</strong> ${course.lessonLength} minuter</p>
+          <p><strong>Lärare:</strong> ${course.teacher}</p>
+          <p><strong>Pris:</strong> ${course.price} kr</p>
+          <div class="course-description-container">
+            <strong>Kursinnehåll:</strong>
+            <div class="course-description">
+${course.description
+  ? course.description.split('\n').map(line =>
+      line.trim() ? `<div class="centered-line">${line}</div>` : '<br>'
+    ).join('')
+  : 'Ingen beskrivning tillgänglig'
+}
+            </div>
           </div>
+        </div>
         `
         }).join('')
   }
