@@ -963,16 +963,6 @@ footer {
     width: 100%;
   }
   
-  /* Qualifications */
-  .qual-item {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .year {
-    align-self: flex-start;
-  }
-  
   /* Courses */
   .courses-container {
     grid-template-columns: 1fr;
