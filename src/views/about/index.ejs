@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
+  <meta charset="UTF-8">
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <%- include('../partials/header') %>
 
-  <main>
-    <h1>Här ska information om Lene vara, samt dj, instruktör och hennes produktioner.</h1>
+<%- include('../partials/header') %>
+
+<body>
+  <main class="container">
+    <!-- Lene Section -->
+    <section id="about-section">
+      <div class="about-text">
+        <h1 class="Lene">Det här är Lene – Grundare & Dansinstruktör, Tango Kalmar</h1>
+        <p>
+          Lene Sejr Sörensen startade TangoKalmar för 20 år sedan och har undervisat samt visat upp tango sedan dess, både i Sverige, Danmark och Tyskland. I tangons värld kallas hon La Lene Roja och med sitt rödflammiga hår och en brinnande passion för dans, teater och sång delar hon gärna med sig av kunskap och inspiration genom sin undervisning och sina produktioner.
+        </p>
+        <p>
+          Hon är diplomerad eurytmist och danspedagog och sjunger i orkestern Tango Trigona.
+        </p>
+        <div class="contact">
+          Tel: <a href="tel:0730375743">073 037 57 43</a>
+        </div>
+        <div class="quote">
+          "LÄR DIG ATT NJUTA AV MUSIKEN OCH ÄLSKA ATT DANSA!"
+        </div>
+      </div>
+      <img src="/Bilder/Lene.png" alt="Lene Sejr Sörensen" class="event-image">
+    </section>
+
+    <!-- Anette Berg Section -->
+    <section id="about-section" class="instructor-section">
+      <div class="about-text">
+        <h2 class="Lene">Tango Instruktör Anette Berg</h2>
+        <p>
+          [Anette Berg here]
+        </p>
+        <div class="contact">
+          Tel: <a href="tel:">[Anette's phone number]</a>
+        </div>
+      </div>
+      <img src="/Bilder/User.webp" alt="Anette Berg" class="event-image">
+    </section>
+
+    <!-- Jorge Hernandez Section -->
+    <section id="about-section" class="instructor-section">
+      <div class="about-text">
+        <h2 class="Lene">DJ och Event-fotograf Jorge Hernandez</h2>
+        <p>
+          [Jorge Hernandez here]
+        </p>
+        <div class="contact">
+        </div>
+      </div>
+      <img src="/Bilder/User.webp" alt="Jorge Hernandez" class="event-image">
+    </section>
   </main>
 
-<%- include('../partials/footer') %>
+  <%- include('../partials/footer') %>
 </body>
 </html>

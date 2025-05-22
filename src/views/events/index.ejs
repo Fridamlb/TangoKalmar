@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
-  <title><%= title %></title>
+  <meta charset="UTF-8">
+  <title><%= title %> | Events</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <%- include('../partials/header') %>
 
-  <main>
-    <h1>Här ska det vara information om kommande events</h1>
+<%- include('../partials/header') %>
+
+<body>
+  <main class="container">
+    <section id="events-section">
+      
+      <!-- Special Event Highlight -->
+      <article class="event-highlight">
+        <h1>En Fantastisk Duo Man Inte Får Missa!</h1>
+        
+        <div class="event-media">
+          <!-- Event Image -->
+          <img src="/Bilder/Event.jpg" alt="Carlos Quillot och Juan Iñarte" class="event-image">
+          
+          <!-- YouTube Thumbnail that opens in new window -->
+          <div class="youtube-thumbnail" onclick="window.open('https://www.youtube.com/watch?v=QZewG0kayMo', '_blank')">
+            <img src="https://img.youtube.com/vi/QZewG0kayMo/hqdefault.jpg" alt="Video thumbnail">
+            <div class="play-button"></div>
+          </div>
+        </div>
+        
+        <!-- Centered Content Container -->
+        <div class="event-text">
+          <p>Den 28 augusti gör Carlos Quillot "Maestro de Bandoneón" en konsert tillsammans med Juan Iñarte.</p>
+          <p>Duon är känd som den enda grupp som har fått äran att uppträda i Tokyo's berömda tangoarena.</p>
+          <p>Juan Iñarte sjunger med total inlevelse och alla tangokänslor. En duo man inte får missa!</p>
+          
+          <div class="event-details">
+            <p><strong>All musik som spelas är till att dansa till, så glöm inte tangoskorna!</strong></p>
+            <ul>
+              <li>Vid behov ges en lätt introduktion i tangodansens värld av Lene Sejr Sörensen från TangoKalmar</li>
+            </ul>
+          </div>
+          
+          <div class="event-details">
+            <h3>Praktisk information</h3>
+            <ul>
+              <li><strong>Tid:</strong> 19:30–23:00</li>
+              <li><strong>Pris:</strong> 200kr (150kr för de som tar lektioner av Carina Mele)</li>
+              <li><strong>Plats:</strong> Skälbyallén 6, 392 52 Kalmar</li>
+            </ul>
+          </div>
+          
+          <p>Anmäl ditt intresse och boka plats genom att höra av dig till Lene: <a href="tel:0730375743">073 - 037 57 43</a></p>
+        </div>
+      </article>
+      
+      <!-- Google Maps Embed -->
+      <div class="map-container">
+        <h3>Hitta hit</h3>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4383.063975648648!2d16.33146989904025!3d56.68228930496617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4657d1987468b6cb%3A0x15bb11a88eab6dc6!2sSk%C3%A4lbyall%C3%A9n%206%2C%20392%2052%20Kalmar!5e0!3m2!1ssv!2sse!4v1747916748437!5m2!1ssv!2sse"
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
   </main>
 
-<%- include('../partials/footer') %>
+  <%- include('../partials/footer') %>
 </body>
 </html>
