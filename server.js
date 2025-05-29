@@ -6,6 +6,7 @@ import { createServer } from 'http'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
+import helmet from 'helmet'
 
 import router from './src/routes/site.js'
 import courseRoutes from './src/routes/courses.js'
@@ -16,6 +17,9 @@ const app = express()
 const server = createServer(app)
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+app.use(helmet.frameguard()) // Skyddar mot clickjacking
+app.use(helmet.noSniff()) // Förhindrar MIME-sniffing
 
 // MongoDB-anslutning
 mongoose.connect(process.env.MONGODB_URI)
