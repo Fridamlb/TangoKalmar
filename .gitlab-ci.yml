@@ -19,7 +19,8 @@ lint:
   - chmod 700 ~/.ssh
   - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H "$PRODUCTION_HOST" >> ~/.ssh/known_hosts
+  - echo "Production host is: $PRODUCTION_HOST"  # Debug line
+  - ssh-keyscan -H "$PRODUCTION_HOST" >> ~/.ssh/known_hosts || echo "ssh-keyscan failed, continuing anyway"
 
 tests:
   stage: test
@@ -36,7 +37,9 @@ deploy-production_job:
   script:
     - echo "Testing SSH connection..."
     - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@"$PRODUCTION_HOST" "echo Connected to production server"
-    - echo "Deploying via SCP..."
-    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@"$PRODUCTION_HOST":/var/www/TangoKalmar/build/
+    - echo "Deploying source files..."
+    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR --exclude=node_modules --exclude=.git . ubuntu@"$PRODUCTION_HOST":/var/www/TangoKalmar/
+    - echo "Installing dependencies on server..."
+    - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@"$PRODUCTION_HOST" "cd /var/www/TangoKalmar && npm install && pm2 restart TangoKalmar || pm2 start server.js --name TangoKalmar"
   only:
     - main
