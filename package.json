@@ -5,6 +5,7 @@
   "description": "Detta är ditt projekts GitLab-projekt och här hittar du bland annat Wikin i vilken du ska dokumentera ditt projekt. Du hittar länk till din Wiki i menyn till vänster.",
   "scripts": {
     "start": "node server.js",
+    "production": "NODE_ENV=production node server.js",
     "build": "vite build",
     "dev": "nodemon server.js",
     "lint": "npx eslint ./src || exit 0",
