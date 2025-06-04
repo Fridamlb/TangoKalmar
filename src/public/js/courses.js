@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const elements = {
     showFormBtn: document.getElementById('show-form-btn'),
     addCourseForm: document.getElementById('add-course-form'),
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  let courses = [] // Local courses cache
+  let courses = []
 
   // Initialize the UI
   /**
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Fel vid hämtning av kurser:', error)
       showNotification('Kunde inte hämta kurser', 'error')
-      renderCourseLists([]) // Render empty lists
+      renderCourseLists([])
     }
   }
 

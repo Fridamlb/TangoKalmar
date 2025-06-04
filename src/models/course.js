@@ -35,7 +35,7 @@ const courseSchema = new mongoose.Schema({
   },
   active: {
     type: Boolean,
-    default: true // 👈 detta gör att alla nya kurser är aktiva
+    default: true
   },
   createdAt: {
     type: Date,
@@ -43,7 +43,6 @@ const courseSchema = new mongoose.Schema({
   }
 })
 
-// Se till att virtuals inkluderas när vi konverterar till JSON
 courseSchema.set('toJSON', { virtuals: true })
 courseSchema.set('toObject', { virtuals: true })
 

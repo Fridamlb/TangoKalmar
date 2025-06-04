@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutBtn.addEventListener('click', () => {
       localStorage.removeItem('isAdmin')
       localStorage.removeItem('token')
-      location.reload() // Reload the page
+      location.reload()
     })
   }
 
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (courseForm) courseForm.style.display = 'block'
           wrapper.classList.remove('active-popup')
           console.log('Login successful') // Debug message 7
-          location.reload() // Reload to update the UI
+          location.reload()
         } else {
           alert(result.message || 'Login failed')
         }

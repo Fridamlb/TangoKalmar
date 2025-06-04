@@ -19,6 +19,7 @@ export async function getCourses (req, res) {
     })
   }
 }
+
 // POST /courses
 /**
  * Deletes a course by its ID and sends a confirmation message or an error response.
