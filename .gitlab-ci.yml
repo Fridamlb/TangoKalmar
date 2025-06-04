@@ -12,37 +12,37 @@ lint:
   script:
     - npm run lint
 
-.before_script: &before_script_ssh_stepup # This is a reusable block for setting up SSH keys and known hosts. 
-  - add --no-cache openssh
+.before_script: &before_script_ssh_setup
+  - apk add --no-cache openssh
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  - echo "§SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
   - ssh-keyscan -H "$PRODUCTION_HOST" >> ~/.ssh/known_hosts
 
-tests:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+tests:
+  stage: test
   script:
     - npm install
-    - npm run build
+    - npm run test
 
 build:
   stage: build
   script:
     - npm install
     - npm run build
-artifacts:
+  artifacts:
     paths:
       - build
 
 deploy-production_job:
   stage: deploy
   environment:
-    name : production
+    name: production
     url: http://$PRODUCTION_HOST
-  before_script: *before_script_ssh_stepup
+  before_script: *before_script_ssh_setup
   script:
-    - echo "Testing Deploying to production environment..."
+    - echo "Testing SSH connection..."
     - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@"$PRODUCTION_HOST" "echo Connected to production server"
     - echo "Deploying via SCP..."
     - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@"$PRODUCTION_HOST":/var/www/TangoKalmar/build/
