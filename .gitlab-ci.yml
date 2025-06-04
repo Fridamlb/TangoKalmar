@@ -6,12 +6,13 @@ stages:
   - deploy
 
 .before_script: &before_script_ssh_setup
-  - apk add --no-cache openssh
+  - apk add --no-cache openssh git # Added git for potential SCP needs
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H '$PRODUCTION_HOST' >> ~/.ssh/known_hosts
+  # Remove single quotes around the variable
+  - ssh-keyscan -H $PRODUCTION_HOST >> ~/.ssh/known_hosts
 
 lint:
   stage: lint
@@ -24,7 +25,7 @@ lint:
 tests:
   stage: test
   script:
-    - npm install
+    - npm ci
     - npm run test
 
 deploy-production_job:
@@ -32,11 +33,19 @@ deploy-production_job:
   environment:
     name: production
     url: http://$PRODUCTION_HOST
-  before_script: *before_script_ssh_setup
+  before_script: 
+    - *before_script_ssh_setup
+    # Add build step before deployment
+    - npm ci
+    - npm run build
   script:
     - echo "Testing SSH connection..."
-    - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@"$PRODUCTION_HOST" "echo Connected to production server"
+    - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@$PRODUCTION_HOST "echo Connected to production server"
     - echo "Deploying via SCP..."
-    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@"$PRODUCTION_HOST":/var/www/myapp/TangoKalmar/build/
+    # Create target directory first if needed
+    - ssh -i ~/.ssh/id_rsa ubuntu@$PRODUCTION_HOST "mkdir -p /var/www/myapp/TangoKalmar/build"
+    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@$PRODUCTION_HOST:/var/www/myapp/TangoKalmar/build/
+    # Optional: restart your application
+    - ssh -i ~/.ssh/id_rsa ubuntu@$PRODUCTION_HOST "cd /var/www/myapp/TangoKalmar && npm ci --production && pm2 restart all"
   only:
     - main
