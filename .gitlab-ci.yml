@@ -3,7 +3,6 @@ image: node:latest
 stages:
   - lint
   - test
-  - build
   - deploy
 
 lint:
@@ -27,15 +26,6 @@ tests:
   script:
     - npm install
     - npm run test
-
-build:
-  stage: build
-  script:
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - build
 
 deploy-production_job:
   stage: deploy
