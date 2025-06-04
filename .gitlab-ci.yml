@@ -31,7 +31,7 @@ deploy-production_job:
   stage: deploy
   environment:
     name: production
-    url: http://$PRODUCTION_HOST
+    url: https://cscloud7-255.lnu.se/
   before_script: *before_script_ssh_setup
   script:
     - echo "Testing SSH connection..."
