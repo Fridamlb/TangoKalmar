@@ -37,6 +37,6 @@ deploy-production_job:
     - echo "Testing SSH connection..."
     - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@"$PRODUCTION_HOST" "echo Connected to production server"
     - echo "Deploying via SCP..."
-    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@"$PRODUCTION_HOST":/var/www/TangoKalmar/build/
+    - scp -rp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o LogLevel=ERROR build/* ubuntu@"$PRODUCTION_HOST":/var/www/myapp/build/
   only:
     - main
