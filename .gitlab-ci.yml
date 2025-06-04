@@ -5,14 +5,6 @@ stages:
   - test
   - deploy
 
-lint:
-  stage: lint
-  image: node:20-alpine
-  before_script:
-    - npm ci
-  script:
-    - npx eslint ./src --no-eslintrc || exit 0
-
 .before_script: &before_script_ssh_setup
   - apk add --no-cache openssh
   - mkdir -p ~/.ssh
@@ -20,6 +12,14 @@ lint:
   - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
   - ssh-keyscan -H "$PRODUCTION_HOST" >> ~/.ssh/known_hosts
+
+lint:
+  stage: lint
+  image: node:20-alpine
+  before_script:
+    - npm ci
+  script:
+    - npx eslint ./src --no-eslintrc || exit 0
 
 tests:
   stage: test
